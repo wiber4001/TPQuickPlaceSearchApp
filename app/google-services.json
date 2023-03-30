@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "295933390170",
+    "project_id": "tpquickplacesearchwny2023",
+    "storage_bucket": "tpquickplacesearchwny2023.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:295933390170:android:877d6ffa3c264dd4b0d763",
+        "android_client_info": {
+          "package_name": "com.wny2023.tpquickplacesearchapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "295933390170-ik50mljkvrli3rbk3ikbp5bauj8fcqtb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtnZs1ImHa7Ik96-mYKLxCgryW7VpUcjo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "295933390170-ik50mljkvrli3rbk3ikbp5bauj8fcqtb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
