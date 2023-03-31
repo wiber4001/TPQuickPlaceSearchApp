@@ -52,5 +52,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore-ktx'
     //kakao로그인 라이브러리
     implementation "com.kakao.sdk:v2-user:2.13.0" // 카카오 로그인
+    //google login SDK
+    implementation 'com.google.android.gms:play-services-auth:20.4.1'
+
 
 }

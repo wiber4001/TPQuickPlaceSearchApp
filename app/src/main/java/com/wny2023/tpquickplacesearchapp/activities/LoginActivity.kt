@@ -6,6 +6,14 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.tasks.Task
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
@@ -86,9 +94,36 @@ class LoginActivity : AppCompatActivity() {
 
     }
     private fun clickedLoginGoogle(){
-        // Google에서 검색 [안드로이드 구글 로그인]
+        // Google에서 검색 ['android google login' 으로 영어검색]
 
+        // 구글 로그인 옵션객체(동의항목에 해당) 생성 - Builder 이용
+        val signInOptions:GoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
+        // 디폴트구글계정(not게임계정) 으로 로긴하고 email만 요청
+
+        // 구글 로그인 화면(액티비티)을 실행하는 Intent를 통해 로그인을 구현 - Intent형 객체를 이용함
+        val intent:Intent= GoogleSignIn.getClient(this,signInOptions).signInIntent
+        resultLauncher.launch(intent)
     }
+    // 구글 로그인 화면(액티비티)의 실행결과를 받아오는 계약체결 대행사
+    val resultLauncher:ActivityResultLauncher<Intent> = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),object :ActivityResultCallback<ActivityResult>{
+        override fun onActivityResult(result: ActivityResult?) {
+            //로그인 결과를 가져온 인텐트(택배기사) 객체 소환
+            val intent:Intent?= result?.data
+
+            //돌아온 Intent로부터 구글 계정 정보를 가져오는 작업 수행
+            val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(intent)
+            val account:GoogleSignInAccount = task.result
+            var id:String= account.id.toString()
+            var email:String = account.email ?:""
+
+            Toast.makeText(this@LoginActivity, "$email", Toast.LENGTH_SHORT).show()
+            G.userAccount= UserAccount(id,email)
+
+            //main화면으로 이동
+            startActivity(Intent(this@LoginActivity,MainActivity::class.java))
+            finish()
+        }
+    })
     private fun clickedLoginNaver(){
 
     }
