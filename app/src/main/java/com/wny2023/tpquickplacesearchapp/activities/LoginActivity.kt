@@ -17,10 +17,18 @@ import com.google.android.gms.tasks.Task
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
+import com.navercorp.nid.NaverIdLoginSDK
+import com.navercorp.nid.oauth.OAuthLoginCallback
 import com.wny2023.tpquickplacesearchapp.G
 import com.wny2023.tpquickplacesearchapp.R
 import com.wny2023.tpquickplacesearchapp.databinding.ActivityLoginBinding
+import com.wny2023.tpquickplacesearchapp.model.NidUserInfoResponse
 import com.wny2023.tpquickplacesearchapp.model.UserAccount
+import com.wny2023.tpquickplacesearchapp.network.RetrofitAPIService
+import com.wny2023.tpquickplacesearchapp.network.RetrofitHelper
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
 
@@ -125,6 +133,52 @@ class LoginActivity : AppCompatActivity() {
         }
     })
     private fun clickedLoginNaver(){
+        // 네아로 초기화
+        NaverIdLoginSDK.initialize(this,"YQIVLX_PTMjxDlxTmNyK","DP5ZW1Mi3Q","어디야")
+        // 네이버 로그인
+        NaverIdLoginSDK.authenticate(this, object : OAuthLoginCallback {
+            override fun onError(errorCode: Int, message: String) {
+                Toast.makeText(this@LoginActivity, "server error:$message", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onFailure(httpStatus: Int, message: String) {
+                Toast.makeText(this@LoginActivity, "로그인실패:$message", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onSuccess() {
+                Toast.makeText(this@LoginActivity, "로그인 성공", Toast.LENGTH_SHORT).show()
+                //사용자 정보를 가져오는 REST API 를 작업할때 접속토큰이 필요함
+                val accessToken:String? = NaverIdLoginSDK.getAccessToken()
+                //토큰값 확인
+                Log.i("token",accessToken.toString())
+
+                //레트로핏으로 사용자 정보 API를 가져오기
+                val retrofit = RetrofitHelper.getRetrofitInstance("https://openapi.naver.com")
+                retrofit.create(RetrofitAPIService::class.java).getNidUserInfo("Bearer $accessToken").enqueue(object:Callback<NidUserInfoResponse>{
+                    override fun onResponse(
+                        call: Call<NidUserInfoResponse>,
+                        response: Response<NidUserInfoResponse>
+                    ) {
+                        val userInfoResponse : NidUserInfoResponse?= response.body()
+                        val id:String = userInfoResponse?.response?.id ?:"" //elvis 식으로 null처리
+                        val email:String = userInfoResponse?.response?.email ?:""
+                        Toast.makeText(this@LoginActivity, "$email 로 로그인", Toast.LENGTH_SHORT).show()
+                        G.userAccount = UserAccount(id,email)
+
+                        // main화면으로 이동
+                        startActivity(Intent(this@LoginActivity,MainActivity::class.java))
+                        finish()
+                    }
+
+                    override fun onFailure(call: Call<NidUserInfoResponse>, t: Throwable) {
+                        Toast.makeText(this@LoginActivity, "회원정보 불러오기 실패:${t.message}", Toast.LENGTH_SHORT).show()
+                    }
+                })
+
+
+            }
+
+        })
 
     }
 
