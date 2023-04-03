@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "295933390170",
+    "project_id": "tpquickplacesearchwny2023",
+    "storage_bucket": "tpquickplacesearchwny2023.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:295933390170:android:877d6ffa3c264dd4b0d763",
+        "android_client_info": {
+          "package_name": "com.wny2023.tpquickplacesearchapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "295933390170-j395rkvksqr891agm13ouuq16vm6nvu4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wny2023.tpquickplacesearchapp",
+            "certificate_hash": "91ab81074e5c1fdb81b7001fd78c0a06d3373f3b"
+          }
+        },
+        {
+          "client_id": "295933390170-9ofa3a5964q75ck5u1cirjur1ngqjaju.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtnZs1ImHa7Ik96-mYKLxCgryW7VpUcjo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "295933390170-9ofa3a5964q75ck5u1cirjur1ngqjaju.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
