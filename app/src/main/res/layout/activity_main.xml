@@ -30,4 +30,39 @@
             android:gravity="center"/>
     </androidx.appcompat.widget.Toolbar>
 
+    <HorizontalScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:scrollbars="none">
+<!--   다른문서를 java같은 코딩없이 가져올수있음     -->
+        <include layout="@layout/choice_list"
+            android:id="@+id/layout_choice"/>
+    </HorizontalScrollView>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/scrollView"
+        app:tabIndicatorColor="#aa1166ff"
+        app:tabSelectedTextColor="#aa1166ff"
+        app:tabTextColor="#ffdddddd">
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LIST"/>
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MAP"/>
+    </com.google.android.material.tabs.TabLayout>
+    <FrameLayout
+        android:id="@+id/container_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tab_layout"
+        android:layout_marginTop="8dp"/>
+
 </RelativeLayout>
