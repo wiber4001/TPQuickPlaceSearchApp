@@ -18,7 +18,9 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
+import androidx.fragment.app.ListFragment
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -33,6 +35,8 @@ import com.wny2023.tpquickplacesearchapp.databinding.ActivityMainBinding
 import com.wny2023.tpquickplacesearchapp.fragments.PlaceListFragment
 import com.wny2023.tpquickplacesearchapp.fragments.PlaceMapFragment
 import com.wny2023.tpquickplacesearchapp.model.KakaoSearchPlaceResponse
+import com.wny2023.tpquickplacesearchapp.model.Place
+import com.wny2023.tpquickplacesearchapp.model.PlaceMeta
 import com.wny2023.tpquickplacesearchapp.network.RetrofitAPIService
 import com.wny2023.tpquickplacesearchapp.network.RetrofitHelper
 import retrofit2.Call
@@ -183,7 +187,7 @@ class MainActivity : AppCompatActivity() {
             R.id.choice_ev->searchQuery="충전소"
             R.id.choice_park->searchQuery="공원"
             R.id.choice_pharm->searchQuery="약국"
-            R.id.choice_coffee->searchQuery="화장실"
+            R.id.choice_coffee->searchQuery="카페"
             R.id.choice_1->searchQuery="버스정류장"
             R.id.choice_2->searchQuery="버스정류장"
             R.id.choice_3->searchQuery="버스정류장"
@@ -209,7 +213,18 @@ class MainActivity : AppCompatActivity() {
                 response: Response<KakaoSearchPlaceResponse>
             ) {
                 searchPlaceResponse= response.body()
-                Toast.makeText(this@MainActivity, "${searchPlaceResponse?.meta?.total_count}", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this@MainActivity, "${searchPlaceResponse?.meta?.total_count}", Toast.LENGTH_SHORT).show()
+                //먼저 데이터가 온전히 잘 왔는지 파악하기 위해...
+                val meta: PlaceMeta?= searchPlaceResponse?.meta
+                val documents:MutableList<Place>? = searchPlaceResponse?.documents
+                AlertDialog.Builder(this@MainActivity).setMessage("${meta?.total_count} \n ${documents?.get(0)?.place_name}").show()
+
+                //무조건 검색이 완료되면 ListFragment부터 보여주기
+                supportFragmentManager.beginTransaction().replace(R.id.container_fragment,PlaceListFragment()).commit()
+
+                //탭버튼의 위치를 ListFragment tab으로 변경
+                binding.tabLayout.getTabAt(0)?.select()
+
             }
 
             override fun onFailure(call: Call<KakaoSearchPlaceResponse>, t: Throwable) {
