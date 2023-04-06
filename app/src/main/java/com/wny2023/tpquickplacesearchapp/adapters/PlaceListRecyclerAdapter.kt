@@ -1,10 +1,12 @@
 package com.wny2023.tpquickplacesearchapp.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.wny2023.tpquickplacesearchapp.activities.PlaceUrlActivity
 import com.wny2023.tpquickplacesearchapp.databinding.RecyclerItemListFragmentBinding
 import com.wny2023.tpquickplacesearchapp.model.Place
 
@@ -29,6 +31,13 @@ class PlaceListRecyclerAdapter(var context:Context, var documents:MutableList<Pl
         // if-else문을 3항연산자 처럼 축약
         holder.binding.tvAddress.text=if(place.road_address_name=="") place.address_name else place.road_address_name
         holder.binding.tvDistance.text="${place.distance} m" //서식모양, 문자열템플릿
+
+        holder.binding.root.setOnClickListener{
+            val intent:Intent =Intent(context,PlaceUrlActivity::class.java)
+            intent.putExtra("place_url",place.place_url)
+            context.startActivity(intent)
+        }
+
     }
 
 }
