@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
     <!-- 인터넷퍼미션 추가 -->
-    <uses-permission android:name="android.permission.INTERNET" /> <!-- 위치정보제공 퍼미션 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 위치정보제공 퍼미션 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
@@ -58,6 +59,8 @@
                     android:scheme="kakaob5bd3a2bf50bf6e787e388893bb33fc2" />
             </intent-filter>
         </activity>
+        <!--  카카오 지도 APP키(네이티브 앱 키)를 등록     -->
+        <meta-data android:name="com.kakao.sdk.AppKey" android:value="b5bd3a2bf50bf6e787e388893bb33fc2"/>
     </application>
 
 </manifest>

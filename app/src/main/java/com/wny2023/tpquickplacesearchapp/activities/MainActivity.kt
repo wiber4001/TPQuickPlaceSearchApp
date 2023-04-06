@@ -189,9 +189,9 @@ class MainActivity : AppCompatActivity() {
             R.id.choice_pharm->searchQuery="약국"
             R.id.choice_coffee->searchQuery="카페"
             R.id.choice_1->searchQuery="버스정류장"
-            R.id.choice_2->searchQuery="버스정류장"
+            R.id.choice_2->searchQuery="맛집"
             R.id.choice_3->searchQuery="버스정류장"
-            R.id.choice_4->searchQuery="버스정류장"
+            R.id.choice_4->searchQuery="맛집"
             R.id.choice_5->searchQuery="버스정류장"
         }
         //새로운 검색시작
