@@ -100,7 +100,9 @@ class LoginActivity : AppCompatActivity() {
             UserApiClient.instance.loginWithKakaoAccount(this,callback = callback )
         }
 
-    }
+    } //카카오 로그인
+
+
     private fun clickedLoginGoogle(){
         // Google에서 검색 ['android google login' 으로 영어검색]
 
@@ -111,7 +113,9 @@ class LoginActivity : AppCompatActivity() {
         // 구글 로그인 화면(액티비티)을 실행하는 Intent를 통해 로그인을 구현 - Intent형 객체를 이용함
         val intent:Intent= GoogleSignIn.getClient(this,signInOptions).signInIntent
         resultLauncher.launch(intent)
-    }
+    }// 구글로그인
+
+
     // 구글 로그인 화면(액티비티)의 실행결과를 받아오는 계약체결 대행사
     val resultLauncher:ActivityResultLauncher<Intent> = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),object :ActivityResultCallback<ActivityResult>{
         override fun onActivityResult(result: ActivityResult?) {
@@ -131,7 +135,8 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this@LoginActivity,MainActivity::class.java))
             finish()
         }
-    })
+    }) //구글로그인 계약체결 멤버변수
+
     private fun clickedLoginNaver(){
         // 네아로 초기화
         NaverIdLoginSDK.initialize(this,"YQIVLX_PTMjxDlxTmNyK","DP5ZW1Mi3Q","어디야")
@@ -180,7 +185,7 @@ class LoginActivity : AppCompatActivity() {
 
         })
 
-    }
+    }//naver 로그인
 
 
 }
