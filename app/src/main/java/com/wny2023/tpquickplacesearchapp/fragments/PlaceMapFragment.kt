@@ -44,7 +44,7 @@ class PlaceMapFragment : Fragment() {
         // 맵의 중심좌표를 내가 원하는 위치로 변경
         // 현재 내 위치 위도, 경도 좌표 (nullable이므로 서울시청 위도경도를 임의로 default 설정)
         var lat:Double = (activity as MainActivity).myLocation?.latitude ?:  126.9779
-        var lng:Double = (activity as MainActivity).myLocation?.latitude ?: 37.5663
+        var lng:Double = (activity as MainActivity).myLocation?.longitude ?: 37.5663
 
         var myMapPoint:MapPoint = MapPoint.mapPointWithGeoCoord(lat, lng)
         mapView.setMapCenterPointAndZoomLevel(myMapPoint,3,true)

@@ -217,7 +217,7 @@ class MainActivity : AppCompatActivity() {
                 //먼저 데이터가 온전히 잘 왔는지 파악하기 위해...
                 val meta: PlaceMeta?= searchPlaceResponse?.meta
                 val documents:MutableList<Place>? = searchPlaceResponse?.documents
-                AlertDialog.Builder(this@MainActivity).setMessage("${meta?.total_count} \n ${documents?.get(0)?.place_name}").show()
+//                AlertDialog.Builder(this@MainActivity).setMessage("${meta?.total_count} \n ${documents?.get(0)?.place_name}").show()
 
                 //무조건 검색이 완료되면 ListFragment부터 보여주기
                 supportFragmentManager.beginTransaction().replace(R.id.container_fragment,PlaceListFragment()).commit()
