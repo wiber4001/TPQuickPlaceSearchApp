@@ -28,6 +28,7 @@
 -dontwarn org.conscrypt.*
 -dontwarn org.openjsse.**
 -keep class net.daum.**
+-keep class net.daum.** {*;}
 # Retrofit does reflection on generic parameters. InnerClasses is required to use Signature and
 # EnclosingMethod is required to use InnerClasses.
 -keepattributes Signature, InnerClasses, EnclosingMethod
